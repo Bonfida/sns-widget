@@ -17,6 +17,7 @@ const Widget = ({
   containerClassNames,
   containerStyles,
   referrerCode,
+  partnerLogo,
 }: WidgetProps) => {
   return (
     <SolanaProvider
@@ -26,7 +27,11 @@ const Widget = ({
     >
       <CartContextProvider referrerCode={referrerCode}>
         <GlobalStatusContextProvider>
-          <WidgetHome className={containerClassNames} style={containerStyles} />
+          <WidgetHome
+            className={containerClassNames}
+            style={containerStyles}
+            partnerLogo={partnerLogo}
+          />
         </GlobalStatusContextProvider>
       </CartContextProvider>
     </SolanaProvider>

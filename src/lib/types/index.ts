@@ -6,7 +6,7 @@ import type {
   SignerWalletAdapterProps,
 } from "@solana/wallet-adapter-base";
 import type { Wallet } from "@solana/wallet-adapter-react";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 export interface WalletPassThroughProps {
   publicKey: PublicKey | null | undefined;
@@ -45,4 +45,5 @@ interface CommonProps {
   rootWrapperStyles?: CSSProperties;
   isDark?: boolean;
   referrerCode?: PublicKey;
+  partnerLogo?: ReactNode;
 }

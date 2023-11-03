@@ -19,15 +19,18 @@ import { useDomainSuggestions } from "../hooks/useDomainSuggestions";
 import { ConnectWalletButton } from "../components/connect-wallet-button";
 import { GlobalStatusCard } from "../components/global-status";
 import { GlobalStatusContext } from "../contexts/status-messages";
+import { WidgetProps } from "..";
 
 type Views = "home" | "search" | "cart";
 
 export const WidgetHome = ({
   className,
   style,
+  partnerLogo,
 }: {
   className?: string;
   style?: CSSProperties;
+  partnerLogo?: WidgetProps["partnerLogo"];
 } = {}) => {
   const { connected } = useWalletPassThrough();
   const [currentView, setCurrentView] = useState<Views>("home");
@@ -200,9 +203,15 @@ export const WidgetHome = ({
         <div className="p-3">
           <div className="flex items-center justify-center gap-2 text-sm font-medium text-center text-text-primary">
             Powered by
-            <span className="h-[20px]">
+            <span className="h-[20px] flex">
               <FidaLogo />
             </span>
+            {partnerLogo && (
+              <>
+                <span>x</span>
+                <span className="flex">{partnerLogo}</span>
+              </>
+            )}
           </div>
         </div>
       )}
