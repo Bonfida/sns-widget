@@ -60,13 +60,17 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), dts({ rollupTypes: true, include: ["src/lib"] })],
   };
   const previewConfig = {
+    base: "/sns-widget/",
     build: {
       outDir: "./preview-build",
     },
     plugins: [react()],
   };
 
-  const buildConfig = mode === "lib" ? libConfig : previewConfig;
+  let buildConfig = {};
+
+  if (mode === "lib") buildConfig = libConfig;
+  if (mode === "preview") buildConfig = previewConfig;
 
   return {
     server: {
