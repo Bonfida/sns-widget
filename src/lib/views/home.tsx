@@ -98,7 +98,7 @@ export const WidgetHome = ({
                 <InputField
                   value={searchInput}
                   placeholder="Search your domain"
-                  className="shadow-3xl dark:shadow-none"
+                  className="shadow-input-field dark:shadow-none"
                   type="search"
                   onChange={(e) => updateSearchInput(e.target.value)}
                 />

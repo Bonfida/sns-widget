@@ -24,7 +24,7 @@ export default {
         "width-to-zero": "width-to-zero 4s forwards",
       },
       boxShadow: {
-        "3xl": "0px 16px 32px rgba(215, 221, 225, 0.25)",
+        "input-field": "0px 16px 32px rgba(215, 221, 225, 0.25)",
         domain: "0px 20px 40px 0px rgba(179, 179, 179, 0.25)",
       },
     },
