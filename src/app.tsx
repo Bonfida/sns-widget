@@ -21,6 +21,7 @@ import {
 } from "@solana/wallet-adapter-react-ui";
 import Widget from "./lib";
 
+import "./index.css";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
 const PUBLIC_RPC = import.meta.env.VITE_PUBLIC_RPC as string;

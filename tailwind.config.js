@@ -2,6 +2,10 @@
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
+  corePlugins: {
+    preflight: false,
+  },
+  important: '.tw-bonfida-widget-root',
   theme: {
     extend: {
       fontFamily: {

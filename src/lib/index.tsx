@@ -18,7 +18,7 @@ const EntryPoint = ({
   return (
     <div
       className={twMerge(
-        "bonfida-widget-root",
+        "bonfida-widget-root tw-bonfida-widget-root",
         "fixed bottom-3 right-3 z-1",
         rootWrapperClassNames,
         isDark && "dark",

@@ -58,7 +58,7 @@ export const DomainSearchResultRow = ({
               "flex items-center gap-2 px-3 py-1 text-sm text-base-button-content rounded-lg font-primary bg-theme-primary",
               isInCart &&
                 showRemoveButton &&
-                "bg-transparent text-theme-primary",
+                "bg-transparent text-theme-primary dark:text-theme-secondary",
             )}
             tabIndex={0}
             onClick={() =>
