@@ -59,7 +59,7 @@ export const WidgetHome = ({
   return (
     <div
       className={twMerge(
-        "flex flex-col h-[560px] w-[400px] bg-background-primary rounded-lg absolute bottom-16 right-0 text-text-primary",
+        "flex flex-col w-[93svw] h-[560px] max-h-[75svh] max-w-[400px] bg-background-primary rounded-lg absolute bottom-16 right-0 text-text-primary overflow-auto",
         className,
       )}
       style={style}
