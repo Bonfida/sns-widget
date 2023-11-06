@@ -5,7 +5,7 @@ import {
   type CSSProperties,
 } from "react";
 import { InputField } from "../components/input-field";
-import { SearchShort, SafeBoxStar } from "react-huge-icons/outline";
+import { SearchShort } from "react-huge-icons/outline";
 import { twMerge } from "tailwind-merge";
 import { CartContext } from "../contexts/cart";
 import { DomainSearchResultRow } from "../components/domain-search-result-row";
@@ -193,21 +193,6 @@ export const WidgetHome = ({
         )}
 
         {isCartView && <CartView backHandler={resetView} />}
-
-        {isHomeView && (
-          <div
-            className="
-              flex items-center gap-2.5
-              py-4 px-2.5 mt-auto mx-3 mb-3
-              bg-background-tertiary
-              font-primary text-theme-primary dark:text-text-secondary
-              rounded-[10px]
-            "
-          >
-            <SafeBoxStar width={24} height={24} />
-            Solana mobile referral gives you 15% off
-          </div>
-        )}
       </div>
 
       {isHomeView && (
