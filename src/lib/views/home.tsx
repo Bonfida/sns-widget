@@ -32,7 +32,11 @@ export const WidgetHome = ({
   style?: CSSProperties;
   partnerLogo?: WidgetProps["partnerLogo"];
 } = {}) => {
-  const { connected } = useWalletPassThrough();
+  const {
+    connected,
+    setVisible,
+    visible: isWalletSelectorVisible,
+  } = useWalletPassThrough();
   const [currentView, setCurrentView] = useState<Views>("home");
   const [finished, finish] = useState(false);
   const [searchInput, updateSearchInput] = useState("");
@@ -164,9 +168,9 @@ export const WidgetHome = ({
                 {!isCartEmpty && (
                   <CustomButton
                     className="absolute left-3 right-3 bottom-3 text-base-button-content"
-                    disabled={!connected}
                     onClick={() => {
                       if (connected) setCurrentView("cart");
+                      else setVisible(!isWalletSelectorVisible);
                     }}
                   >
                     {connected ? "Go to cart" : "Connect your wallet"}
