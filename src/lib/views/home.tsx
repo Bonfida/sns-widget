@@ -38,7 +38,7 @@ export const WidgetHome = ({
     visible: isWalletSelectorVisible,
   } = useWalletPassThrough();
   const [currentView, setCurrentView] = useState<Views>("home");
-  const [finished, finish] = useState(false);
+  const [finished, toggleTransitionFinish] = useState(false);
   const [searchInput, updateSearchInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const { isCartEmpty } = useContext(CartContext);
@@ -50,6 +50,13 @@ export const WidgetHome = ({
     event.preventDefault();
     setCurrentView("search");
     setSearchQuery(searchInput);
+  };
+
+  const resetView = () => {
+    setSearchQuery("");
+    updateSearchInput("");
+    toggleTransitionFinish(false);
+    setCurrentView("home");
   };
 
   const isHomeView = currentView === "home";
@@ -95,7 +102,7 @@ export const WidgetHome = ({
                   finished && "max-h-0",
                 )}
                 onTransitionEnd={() => {
-                  if (isSearchView) finish(true);
+                  if (isSearchView) toggleTransitionFinish(true);
                 }}
               >
                 Secure a custom domain
@@ -110,6 +117,7 @@ export const WidgetHome = ({
                   enterKeyHint="search"
                   className="shadow-input-field dark:shadow-none"
                   type="search"
+                  required
                   onChange={(e) => updateSearchInput(e.target.value)}
                 />
 
@@ -184,20 +192,16 @@ export const WidgetHome = ({
           </>
         )}
 
-        {isCartView && (
-          <CartView backHandler={() => setCurrentView("search")} />
-        )}
+        {isCartView && <CartView backHandler={resetView} />}
 
         {isHomeView && (
           <div
             className="
-              flex items-center mt-auto gap-2.5
+              flex items-center gap-2.5
+              py-4 px-2.5 mt-auto mx-3 mb-3
               bg-background-tertiary
-              text-theme-primary
-              dark:text-text-secondary
-              rounded-[10px] py-4 px-2.5
-              font-primary
-              mx-3 mb-3
+              font-primary text-theme-primary dark:text-text-secondary
+              rounded-[10px]
             "
           >
             <SafeBoxStar width={24} height={24} />
