@@ -52,11 +52,15 @@ export const WidgetHome = ({
     setSearchQuery(searchInput);
   };
 
-  const resetView = () => {
-    setSearchQuery("");
-    updateSearchInput("");
-    toggleTransitionFinish(false);
-    setCurrentView("home");
+  const resetView = (hard = false) => {
+    if (hard) {
+      setSearchQuery("");
+      updateSearchInput("");
+      toggleTransitionFinish(false);
+      setCurrentView("home");
+    } else {
+      setCurrentView("search");
+    }
   };
 
   const isHomeView = currentView === "home";

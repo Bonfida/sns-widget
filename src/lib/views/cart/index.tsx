@@ -37,7 +37,7 @@ import { CartError } from "./error";
 type Step = 1 | 2 | 3;
 
 interface CartViewProps {
-  backHandler: () => void;
+  backHandler: (hard?: boolean) => void;
 }
 
 const SIZES_LIST = [
@@ -119,7 +119,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
         if (formState === "error") await handle();
         if (formState === "success") {
           emptyCart();
-          backHandler();
+          backHandler(true);
         }
         break;
       default:
@@ -467,7 +467,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
           {formState === "error" && (
             <CustomButton
               className={twMerge("bg-transparent text-theme-primary")}
-              onClick={backHandler}
+              onClick={() => backHandler()}
             >
               Close
             </CustomButton>
