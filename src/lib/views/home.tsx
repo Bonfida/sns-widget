@@ -5,7 +5,7 @@ import {
   type CSSProperties,
 } from "react";
 import { InputField } from "../components/input-field";
-import { SearchShort } from "react-huge-icons/outline";
+import { SearchShort } from "../components/icons";
 import { twMerge } from "tailwind-merge";
 import { CartContext } from "../contexts/cart";
 import { DomainSearchResultRow } from "../components/domain-search-result-row";

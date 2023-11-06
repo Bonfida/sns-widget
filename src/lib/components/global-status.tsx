@@ -1,4 +1,4 @@
-import { InformationCircle } from "react-huge-icons/solid";
+import { InformationCircle } from "../components/icons";
 import { useContext, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 import { GlobalStatus, GlobalStatusContext } from "../contexts/status-messages";

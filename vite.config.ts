@@ -2,13 +2,14 @@ import dts from "vite-plugin-dts";
 import react from "@vitejs/plugin-react";
 import { type UserConfig, defineConfig } from "vite";
 import path from "path";
-import { terser } from "rollup-plugin-terser";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 const resolvePath = (str: string) => path.resolve(__dirname, str);
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const libConfig = {
+    minify: "terser",
     build: {
       lib: {
         entry: resolvePath("src/lib/index.tsx"),
@@ -27,10 +28,12 @@ export default defineConfig(({ mode }) => {
           "@pythnetwork/client",
           "@solana/web3.js",
           "@solana/spl-token",
+          "@foxwallet/wallet-adapter-foxwallet",
+          "@solana/wallet-adapter-react",
+          "@solana/wallet-adapter-react-ui",
+          "@solana/wallet-adapter-wallets",
           "ahooks",
           "tailwind-merge",
-          "buffer",
-          "react-huge-icons",
           "react-async-hook",
           "@bonfida/spl-name-service",
           "split-graphemes",
@@ -44,32 +47,39 @@ export default defineConfig(({ mode }) => {
             "@pythnetwork/client": "@pythnetwork/client",
             "@solana/web3.js": "@solana/web3.js",
             "@solana/spl-token": "@solana/spl-token",
+            "@solana/wallet-adapter-react": "@solana/wallet-adapter-react",
+            "@solana/wallet-adapter-react-ui":
+              "@solana/wallet-adapter-react-ui",
+            "@foxwallet/wallet-adapter-foxwallet":
+              "@foxwallet/wallet-adapter-foxwallet",
+            "@solana/wallet-adapter-wallets": "@solana/wallet-adapter-wallets",
             "@bonfida/spl-name-service": "@bonfida/spl-name-service",
             ahooks: "ahooks",
             bs58: "bs58",
             "tailwind-merge": "tailwind-merge",
-            buffer: "buffer",
-            "react-huge-icons": "react-huge-icons",
             "react-async-hook": "react-async-hook",
             "split-graphemes": "split-graphemes",
           },
         },
-        plugins: [terser({ compress: true })],
       },
     },
-    plugins: [react(), dts({ rollupTypes: true, include: ["src/lib"] })],
+    plugins: [
+      react(),
+      nodePolyfills(),
+      dts({ rollupTypes: true, include: ["src/lib"] }),
+    ],
   };
   const previewConfig = {
     base: "/sns-widget/",
     build: {
       outDir: "./preview-build",
     },
-    plugins: [react()],
+    plugins: [react(), nodePolyfills()],
   };
 
   let buildConfig = {};
 
-  if (mode === "lib") buildConfig = libConfig;
+  if (mode === "lib" || mode === "production") buildConfig = libConfig;
   if (mode === "preview") buildConfig = previewConfig;
 
   return {

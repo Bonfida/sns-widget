@@ -1,4 +1,4 @@
-import { InformationCircle } from "react-huge-icons/outline";
+import { InformationCircle } from "../../components/icons";
 
 export const CartError = () => {
   return (

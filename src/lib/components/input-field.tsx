@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, useRef } from "react";
 import { twMerge } from "tailwind-merge";
-import { RemoveThin } from "react-huge-icons/outline";
+import { RemoveThin } from "../components/icons";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 

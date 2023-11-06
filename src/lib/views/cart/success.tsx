@@ -1,4 +1,4 @@
-import { CheckMarkCircle } from "react-huge-icons/outline";
+import { CheckMarkCircle } from "../../components/icons";
 
 export const CartSuccess = () => {
   return (

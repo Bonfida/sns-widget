@@ -1,4 +1,4 @@
-import { WalletClose } from "react-huge-icons/outline";
+import { WalletClose } from "../components/icons";
 import { useWalletPassThrough } from "../contexts/wallet-passthrough-provider";
 import { abbreviate } from "../utils";
 

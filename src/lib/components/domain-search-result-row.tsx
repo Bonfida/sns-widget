@@ -1,9 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import {
-  ShoppingBasketHorizontal,
-  Tick,
-  TrashBent,
-} from "react-huge-icons/outline";
+import { ShoppingBasketHorizontal, TrashBent, Tick } from "../components/icons";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/cart";
 import { DomainCardBase } from "./domain-card-base";

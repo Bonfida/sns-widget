@@ -4,7 +4,7 @@ import {
   WalletClose,
   RemoveThin,
   Information,
-} from "react-huge-icons/outline";
+} from "../../components/icons";
 import { twMerge } from "tailwind-merge";
 import { NATIVE_MINT, getAssociatedTokenAddressSync } from "@solana/spl-token";
 import {

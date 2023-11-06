@@ -1,6 +1,5 @@
 import { useContext } from "react";
-import { Edit } from "react-huge-icons/solid";
-import { TrashBent } from "react-huge-icons/outline";
+import { Edit, TrashBent } from "../components/icons";
 
 import { CartContext } from "../contexts/cart";
 import { DomainCardBase } from "./domain-card-base";
