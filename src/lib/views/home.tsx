@@ -105,6 +105,9 @@ export const WidgetHome = ({
                 <InputField
                   value={searchInput}
                   placeholder="Search your domain"
+                  autoCapitalize="off"
+                  spellCheck="false"
+                  enterKeyHint="search"
                   className="shadow-input-field dark:shadow-none"
                   type="search"
                   onChange={(e) => updateSearchInput(e.target.value)}
