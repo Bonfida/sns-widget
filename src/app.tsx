@@ -1,10 +1,20 @@
 import { ReactNode, useState } from "react";
+import { WalletProvider, useWallet } from "@solana/wallet-adapter-react";
 import {
-  // ConnectionProvider,
-  // useConnection,
-  WalletProvider,
-  useWallet,
-} from "@solana/wallet-adapter-react";
+  SolflareWalletAdapter,
+  Coin98WalletAdapter,
+  CloverWalletAdapter,
+  TorusWalletAdapter,
+  MathWalletAdapter,
+  CoinbaseWalletAdapter,
+  HuobiWalletAdapter,
+  BitKeepWalletAdapter,
+  NekoWalletAdapter,
+  TrustWalletAdapter,
+  SalmonWalletAdapter,
+  NightlyWalletAdapter,
+} from "@solana/wallet-adapter-wallets";
+import { FoxWalletWalletAdapter } from "@foxwallet/wallet-adapter-foxwallet";
 import {
   WalletModalProvider,
   useWalletModal,
@@ -18,7 +28,24 @@ const PUBLIC_RPC = import.meta.env.VITE_PUBLIC_RPC as string;
 const SolanaProvider = ({ children }: { children: ReactNode }) => {
   return (
     // <ConnectionProvider endpoint={PUBLIC_RPC}>
-    <WalletProvider autoConnect wallets={[]}>
+    <WalletProvider
+      autoConnect
+      wallets={[
+        new SolflareWalletAdapter(),
+        new TorusWalletAdapter(),
+        new MathWalletAdapter(),
+        new Coin98WalletAdapter(),
+        new CloverWalletAdapter(),
+        new HuobiWalletAdapter(),
+        new CoinbaseWalletAdapter(),
+        new BitKeepWalletAdapter(),
+        new NekoWalletAdapter(),
+        new TrustWalletAdapter(),
+        new NightlyWalletAdapter(),
+        new SalmonWalletAdapter(),
+        new FoxWalletWalletAdapter(),
+      ]}
+    >
       <WalletModalProvider>{children}</WalletModalProvider>
     </WalletProvider>
     //</ConnectionProvider>
