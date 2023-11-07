@@ -1,12 +1,10 @@
-import "./index.css";
-
+import type { CSSProperties, ReactNode } from "react";
 import type { Connection, PublicKey } from "@solana/web3.js";
 import type {
   WalletName,
   SignerWalletAdapterProps,
 } from "@solana/wallet-adapter-base";
 import type { Wallet } from "@solana/wallet-adapter-react";
-import type { CSSProperties, ReactNode } from "react";
 
 export interface WalletPassThroughProps {
   publicKey: PublicKey | null | undefined;
