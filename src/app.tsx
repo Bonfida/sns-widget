@@ -60,16 +60,19 @@ const Content = () => {
   const [isDark, toggleDark] = useState(false);
 
   return (
-    <>
-      <button
-        style={{
-          backgroundColor: "white",
-          color: "black",
-        }}
-        onClick={() => toggleDark(!isDark)}
-      >
-        Toggle dark
-      </button>
+    <div className="p-10">
+      <h1 className="text-[40px] text-center text-white font-medium">
+        SNS Widget Demo
+      </h1>
+
+      <div className="mt-10">
+        <button
+          className="p-3 bg-white rounded-[24px] font-medium"
+          onClick={() => toggleDark(!isDark)}
+        >
+          Toggle dark
+        </button>
+      </div>
 
       <Widget
         // connection={connection}
@@ -77,7 +80,7 @@ const Content = () => {
         passthroughWallet={{ ...wallet, visible, setVisible }}
         isDark={isDark}
       />
-    </>
+    </div>
   );
 };
 
