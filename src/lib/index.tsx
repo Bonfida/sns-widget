@@ -1,11 +1,11 @@
 import "./index.css";
 
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import type { WidgetProps, WalletPassThroughProps } from "./types";
 import { twMerge } from "tailwind-merge";
 import { FidaIcon } from "./components/fida-icon";
 
-import Widget from "./widget";
+const LazyWidget = lazy(() => import("./widget"));
 
 const EntryPoint = ({
   rootWrapperClassNames,
@@ -35,7 +35,11 @@ const EntryPoint = ({
         <FidaIcon className="w-full h-full" />
       </button>
 
-      {visible && <Widget {...props} />}
+      {visible && (
+        <Suspense>
+          <LazyWidget {...props} />
+        </Suspense>
+      )}
     </div>
   );
 };
