@@ -3,9 +3,9 @@
 @tailwind base;
 @tailwind utilities;
 
-.tw-bonfida-widget-root *,
-.tw-bonfida-widget-root :before,
-.tw-bonfida-widget-root :after {
+.sns-bw *,
+.sns-bw :before,
+.sns-bw :after {
   box-sizing:border-box;
   border-width:0;
   border-style:solid;
@@ -21,8 +21,8 @@
   font-feature-settings:normal;
   font-variation-settings:normal;
 }
-.tw-bonfida-widget-root button,
-.tw-bonfida-widget-root input {
+.sns-bw button,
+.sns-bw input {
   font-family:inherit;
   font-feature-settings:inherit;
   font-variation-settings:inherit;
@@ -32,7 +32,7 @@
   color:inherit;
 }
 
-.tw-bonfida-widget-root button {
+.sns-bw button {
   -webkit-appearance:button;
   background-color:transparent;
   background-image:none;
@@ -40,9 +40,9 @@
   text-transform:none;
 }
 
-.tw-bonfida-widget-root {
+.sns-bw {
   /*
-    Using raw styles because Tailwind is scoped inside .tw-bonfida-widget-root,
+    Using raw styles because Tailwind is scoped inside .sns-bw,
     so we cannot use them on the same DOM node
   */
   position: fixed;
@@ -72,7 +72,7 @@
   /* #000000 */ --modal-overlay-bg: 0, 0, 0;
   /* #FFFFFF */ --base-button-content: 255, 255, 255;
 }
-.tw-bonfida-widget-root.dark {
+.sns-bw.dark {
   /* #5556C1 */ --theme-primary: 85, 86, 193;
   /* #B7B9FF */ --theme-secondary: 183, 185, 255;
   /* #111111 */ --background-primary: 17, 17, 17;

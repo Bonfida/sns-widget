@@ -5,7 +5,7 @@ export default {
   corePlugins: {
     preflight: false,
   },
-  important: '.tw-bonfida-widget-root',
+  important: '.sns-bw',
   theme: {
     extend: {
       fontFamily: {
