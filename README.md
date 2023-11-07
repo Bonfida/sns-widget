@@ -77,10 +77,6 @@ import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 // Here you can modify all the widget colors by editing existing variables (example in the next code block):
 import "./custom-widget-theme.css";
 
-// Link to public RPC for Solana connection. Solana provides free public RPCs
-// with rate limiters, so you might want to use your own RPC Node provider
-const PUBLIC_RPC = "https://api.mainnet-beta.solana.com";
-
 export const App = () => {
   return (
     <ConnectionProvider>
