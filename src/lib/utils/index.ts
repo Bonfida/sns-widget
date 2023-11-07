@@ -42,3 +42,4 @@ export * from "./tokens";
 export * from "./chunk-tx";
 export * from "./wrap-sol";
 export * from "./unwrap-sol";
+export * from "./sanitize-domain-name";

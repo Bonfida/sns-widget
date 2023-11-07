@@ -15,6 +15,7 @@ import { FidaLogo } from "../components/fida-logo";
 import { CartView } from "./cart";
 import { useWalletPassThrough } from "../contexts/wallet-passthrough-provider";
 import { useSearch } from "../hooks/useSearch";
+import { sanitize } from "../utils";
 import { useDomainSuggestions } from "../hooks/useDomainSuggestions";
 import { ConnectWalletButton } from "../components/connect-wallet-button";
 import { GlobalStatusCard } from "../components/global-status";
@@ -122,7 +123,9 @@ export const WidgetHome = ({
                   className="shadow-input-field dark:shadow-none"
                   type="search"
                   required
-                  onChange={(e) => updateSearchInput(e.target.value)}
+                  onChange={(e) =>
+                    updateSearchInput(sanitize(e.target.value, searchInput))
+                  }
                 />
 
                 <button
