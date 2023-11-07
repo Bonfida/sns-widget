@@ -42,6 +42,6 @@ interface CommonProps {
   rootWrapperClassNames?: string;
   rootWrapperStyles?: CSSProperties;
   isDark?: boolean;
-  referrerCode?: PublicKey;
+  referrerKey?: PublicKey;
   partnerLogo?: ReactNode;
 }

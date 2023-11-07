@@ -18,7 +18,7 @@ export interface CartContextValue {
   addToCart: (x: CartItem) => void;
   emptyCart: () => void;
   removeFromCart: (x: Domain) => void;
-  referrerCode?: PublicKey;
+  referrerKey?: PublicKey;
 }
 
 export const CartContext = createContext<CartContextValue>({
@@ -27,15 +27,15 @@ export const CartContext = createContext<CartContextValue>({
   addToCart: () => {},
   emptyCart: () => {},
   removeFromCart: () => {},
-  referrerCode: undefined,
+  referrerKey: undefined,
 });
 
 export const CartContextProvider = ({
   children,
-  referrerCode,
+  referrerKey,
 }: {
   children?: ReactNode;
-  referrerCode?: WidgetProps["referrerCode"];
+  referrerKey?: WidgetProps["referrerKey"];
 } = {}) => {
   const [cart = {}, updateCart] = useSessionStorageState<Cart>(
     "bonfida-widget-cart",
@@ -69,7 +69,7 @@ export const CartContextProvider = ({
         removeFromCart,
         isCartEmpty,
         emptyCart,
-        referrerCode,
+        referrerKey,
       }}
     >
       {children}

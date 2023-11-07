@@ -10,7 +10,7 @@ const Widget = ({
   passthroughWallet,
   containerClassNames,
   containerStyles,
-  referrerCode,
+  referrerKey,
   partnerLogo,
 }: WidgetProps) => {
   return (
@@ -19,7 +19,7 @@ const Widget = ({
       connection={connection}
       passthroughWallet={passthroughWallet}
     >
-      <CartContextProvider referrerCode={referrerCode}>
+      <CartContextProvider referrerKey={referrerKey}>
         <GlobalStatusContextProvider>
           <WidgetHome
             className={containerClassNames}

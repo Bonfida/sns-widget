@@ -59,7 +59,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
   const { balances } = useWalletBalances();
 
   const [step, setStep] = useState<Step>(1);
-  const { cart, emptyCart, addToCart, referrerCode } = useContext(CartContext);
+  const { cart, emptyCart, addToCart, referrerKey } = useContext(CartContext);
   const { setError } = useContext(GlobalStatusContext);
   const [selectedToken, selectToken] = useState(tokenList[0]);
   const [isTokenSelectorOpen, toggleTokenSelector] = useState(false);
@@ -154,8 +154,8 @@ export const CartView = ({ backHandler }: CartViewProps) => {
           buyer,
           ata,
           mintKey,
-          referrerCode
-            ? REFERRERS.find((e) => referrerCode.equals(e))
+          referrerKey
+            ? REFERRERS.find((e) => referrerKey.equals(e))
             : undefined,
         );
         ixs.push(...ix);
