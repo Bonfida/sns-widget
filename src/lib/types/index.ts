@@ -36,12 +36,20 @@ interface ConnectionOnly {
 }
 
 interface CommonProps {
+  // Props to pass through to the wallet component for additional configuration
   passthroughWallet?: WalletPassThroughProps;
+  // Raw CSS class names to apply to the widget container for custom styling
   containerClassNames?: string;
+  // Inline styles to apply to the widget container
   containerStyles?: CSSProperties;
+  // Raw CSS class names to apply to the root wrapper of the widget for custom styling
   rootWrapperClassNames?: string;
+  // Inline styles to apply to the root wrapper of the widget
   rootWrapperStyles?: CSSProperties;
+  // Toggles the dark mode appearance of the widget
   isDark?: boolean;
+  // Public Key for referral tracking to create a share of the transaction for the referrer
   referrerKey?: PublicKey;
+  // React node to display a partner’s logo within the widget interface
   partnerLogo?: ReactNode;
 }
