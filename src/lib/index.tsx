@@ -26,7 +26,7 @@ const EntryPoint = ({
     >
       <button
         onClick={() => setVisible(!visible)}
-        className="w-[50px] h-[50px] rounded-full bg-background-primary overflow-hidden text-text-primary p-2 flex items-center justify-center"
+        className="w-[50px] h-[50px] rounded-full bg-background-primary overflow-hidden text-text-primary p-2 flex items-center justify-center shadow-xl dark:border dark:border-interactive-border"
         type="button"
         aria-label={visible ? "Close SNS widget" : "Open SNS widget"}
         aria-haspopup="true"
