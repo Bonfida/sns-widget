@@ -3,21 +3,7 @@ import {
   ConnectionProvider,
   WalletProvider,
 } from "@solana/wallet-adapter-react";
-import {
-  SolflareWalletAdapter,
-  Coin98WalletAdapter,
-  CloverWalletAdapter,
-  TorusWalletAdapter,
-  MathWalletAdapter,
-  CoinbaseWalletAdapter,
-  HuobiWalletAdapter,
-  BitKeepWalletAdapter,
-  NekoWalletAdapter,
-  TrustWalletAdapter,
-  SalmonWalletAdapter,
-  NightlyWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
-import { FoxWalletWalletAdapter } from "@foxwallet/wallet-adapter-foxwallet";
+import { SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import type { WalletPassThroughProps } from "../types";
 import { WalletPassthroughProvider } from "./wallet-passthrough-provider";
@@ -49,24 +35,7 @@ export const SolanaProvider = ({
   const ShouldWrapWalletProvider = useMemo(() => {
     if (!passthroughWallet) {
       return ({ children }: { children: ReactNode }) => (
-        <WalletProvider
-          wallets={[
-            new SolflareWalletAdapter(),
-            new TorusWalletAdapter(),
-            new MathWalletAdapter(),
-            new Coin98WalletAdapter(),
-            new CloverWalletAdapter(),
-            new HuobiWalletAdapter(),
-            new CoinbaseWalletAdapter(),
-            new BitKeepWalletAdapter(),
-            new NekoWalletAdapter(),
-            new TrustWalletAdapter(),
-            new NightlyWalletAdapter(),
-            new SalmonWalletAdapter(),
-            new FoxWalletWalletAdapter(),
-          ]}
-          autoConnect
-        >
+        <WalletProvider wallets={[new SolflareWalletAdapter()]} autoConnect>
           {children}
         </WalletProvider>
       );
