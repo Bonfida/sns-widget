@@ -1,4 +1,23 @@
-# SNS Widget
+<h1 align="center">SNS Widget</h1>
+<br />
+<p align="center">
+<img width="250" src="https://i.imgur.com/nn7LMNV.png"/>
+</p>
+<p align="center">
+<a href="https://twitter.com/bonfida">
+<img src="https://img.shields.io/twitter/url?label=Bonfida&style=social&url=https%3A%2F%2Ftwitter.com%2Fbonfida">
+</a>
+</p>
+
+<br />
+
+<div align="center">
+<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
+<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+<img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white" />
+</div>
+
+<br />
 
 This widget allows users to seamlessly purchase domain names in the Solana ecosystem, directly from any website that integrates this React component. Built for ease of use and flexibility, the widget interfaces with the Solana Name Service (SNS) and can be customized to fit the style and branding of your website.
 
