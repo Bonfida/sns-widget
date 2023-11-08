@@ -3,13 +3,13 @@ import react from "@vitejs/plugin-react";
 import { type UserConfig, defineConfig } from "vite";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
+import { terser } from "rollup-plugin-terser";
 
 const resolvePath = (str: string) => path.resolve(__dirname, str);
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const libConfig = {
-    minify: "terser",
     build: {
       lib: {
         entry: resolvePath("src/lib/index.tsx"),
@@ -47,6 +47,7 @@ export default defineConfig(({ mode }) => {
             "tailwind-merge": "tailwind-merge",
           },
         },
+        plugins: [terser({ compress: true })],
       },
     },
     plugins: [
