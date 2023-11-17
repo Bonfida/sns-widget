@@ -36,11 +36,11 @@
     "analyse": "vite-bundle-visualizer"
   },
   "peerDependencies": {
-    "@bonfida/spl-name-service": "^1.4.0",
+    "@bonfida/spl-name-service": "2.0.0-alpha.23",
     "@solana/wallet-adapter-react": "^0.15",
     "@solana/wallet-adapter-react-ui": "^0.9",
     "@solana/wallet-adapter-wallets": "^0.19.23",
-    "@solana/web3.js": "^1.78",
+    "@solana/web3.js": "^1.87.6",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -69,12 +69,12 @@
   },
   "dependencies": {
     "@bonfida/emojis": "^1.0.1",
-    "@bonfida/spl-name-service": "^1.4.0",
-    "@pythnetwork/client": "^2.7",
+    "@bonfida/spl-name-service": "2.0.0-alpha.23",
+    "@pythnetwork/client": "^2.19.0",
     "@solana/wallet-adapter-react": "^0.15",
     "@solana/wallet-adapter-react-ui": "^0.9",
     "@solana/wallet-adapter-wallets": "^0.19.23",
-    "@solana/web3.js": "^1.78",
+    "@solana/web3.js": "^1.87.6",
     "ahooks": "^3.7.8",
     "react-async-hook": "^4.0.0",
     "split-graphemes": "^0.5.0"
