@@ -18,19 +18,27 @@
 </div>
 
 <p align="center">
-    <a href="https://github.com/Bonfida/sns-widget/actions"><img src="https://github.com/Bonfida/sns-widget/actions/workflows/check-source-code.yml/badge.svg?branch=main" alt="Build Status"></a>
-    <a href="https://github.com/Bonfida/sns-widget/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@bonfida/sns-widget" alt="License"></a>
+  <a href="https://github.com/Bonfida/sns-widget/actions"><img src="https://github.com/Bonfida/sns-widget/actions/workflows/check-source-code.yml/badge.svg?branch=main" alt="Build Status"></a>
+  <a href="https://www.npmjs.com/package/@bonfida/sns-widget"><img src="https://badge.fury.io/js/@bonfida%2Fsns-widget.svg" alt="npm version" height="18"></a>
+  <a href="https://github.com/Bonfida/sns-widget/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@bonfida/sns-widget" alt="License"></a>
 </p>
 
 <br />
 
-This widget allows users to seamlessly purchase domain names in the Solana ecosystem, directly from any website that integrates this React component. Built for ease of use and flexibility, the widget interfaces with the Solana Name Service (SNS) and can be customized to fit the style and branding of your website.
+This widget allows users to seamlessly purchase domain names in the Solana ecosystem, directly from any website that integrates this React component. Built for ease of use, flexibility, and accessibility in mind, the widget interfaces with the Solana Name Service (SNS) and can be customized to fit the style and branding of your website.
 
 Visit our Demo / Playground over at https://bonfida.github.io/sns-widget/
 
 ![Screenshots](./src/assets/screenshots.png)
 
-## Getting started
+# Table of Contents
+
+1. [🚀 Getting Started](#🚀-getting-started)
+2. [📚 Documentation](#📚-documentation)
+3. [🧩 Peer Dependencies](#🧩-peer-dependencies)
+4. [🌟 Upcoming features/improvements](#🌟-upcoming-featuresimprovements)
+
+## 🚀 Getting started
 
 - [Demo](https://bonfida.github.io/sns-widget/)
 - [Usage example](https://github.com/Bonfida/sns-widget/blob/main/src/app.tsx)
@@ -159,7 +167,7 @@ export const Page = () => {
 }
 ```
 
-### List of props
+## 📚 Documentation
 
 | Prop Name               | Type                     | Description                                                                             |
 | ----------------------- | ------------------------ | --------------------------------------------------------------------------------------- |
@@ -174,9 +182,20 @@ export const Page = () => {
 | `referrerKey`           | `PublicKey`              | Public key for referral tracking to create a share of the transaction for the referrer. |
 | `partnerLogo`           | `ReactNode`              | React node to display a partner’s logo within the widget interface.                     |
 
-## Upcoming features/improvements
+## 🧩 Peer Dependencies
 
-- [ ] Experiment separate bundle for passthroughWallet
-- [ ] Framework-agnostic implementation
-- [ ] Usage via CDN
-- [ ] Improved theming customization
+The widget's implementation relies heavily on open-source libraries from @solana-labs (such as @solana/web3.js and @solana/wallet-adapter-react, and others). Unfortunately, these are [not tree-shakeable](https://github.com/solana-labs/solana-web3.js/issues/1122). To avoid increasing the bundle size, we have chosen not to include these dependencies in our bundle and mark them as peer dependencies or simply `external`. With this approach, users who do not use these dependencies will still receive them upon installation. However, **most importantly**, users who already have these dependencies in their applications won't need to download them again. This significantly reduces the size of the final bundle.
+
+- "@solana/web3.js"
+- "@solana/spl-token"
+- "@solana/wallet-adapter-react"
+- "@solana/wallet-adapter-react-ui"
+- "@solana/wallet-adapter-wallets"
+- "@pythnetwork/client"
+
+## 🌟 Upcoming features/improvements
+
+- [ ] Implement a separate bundle for `passthroughWallet`.
+- [ ] Framework-agnostic implementation.
+- [ ] **Enable usage via CDN** to allow the widget to be used by simply inserting a script link on any website.
+- [ ] **Enhance theming customization** by enabling the customization of not only predefined CSS variables but also the entire CSS. It will be possible to override any CSS selector, or even write your independent definition of CSS selectors. Additionally, this will help reduce the final bundle size by eliminating the need to import the widget's `.css` file.
