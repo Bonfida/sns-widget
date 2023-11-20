@@ -4,6 +4,8 @@ import { type UserConfig, defineConfig } from "vite";
 import path from "path";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import terser from "@rollup/plugin-terser";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import babel from "@rollup/plugin-babel";
 
 const resolvePath = (str: string) => path.resolve(__dirname, str);
 
@@ -14,7 +16,8 @@ export default defineConfig(({ mode }) => {
       lib: {
         entry: resolvePath("src/lib/index.tsx"),
         name: "SNS Widget",
-        formats: ["es", "cjs", "umd"],
+        // The exact order is somehow important to prevent `terser` errors.
+        formats: ["es", "umd", "cjs"],
         fileName: (format) =>
           `sns-widget.${
             format === "cjs" ? "cjs" : format === "es" ? "mjs" : "umd.js"
@@ -30,7 +33,7 @@ export default defineConfig(({ mode }) => {
           "@solana/wallet-adapter-react",
           "@solana/wallet-adapter-react-ui",
           "@solana/wallet-adapter-wallets",
-          "tailwind-merge",
+          "@pythnetwork/client",
         ],
         output: {
           // Provide global variables to use in the UMD build for externalized deps
@@ -44,7 +47,7 @@ export default defineConfig(({ mode }) => {
             "@solana/wallet-adapter-react-ui":
               "@solana/wallet-adapter-react-ui",
             "@solana/wallet-adapter-wallets": "@solana/wallet-adapter-wallets",
-            "tailwind-merge": "tailwind-merge",
+            "@pythnetwork/client": "@pythnetwork/client",
           },
         },
         plugins: [terser({ compress: true })],
@@ -53,6 +56,8 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       nodePolyfills(),
+      babel({ babelHelpers: "bundled" }),
+      nodeResolve({ browser: true, preferBuiltins: false }),
       dts({ rollupTypes: true, include: ["src/lib"] }),
     ],
   };
