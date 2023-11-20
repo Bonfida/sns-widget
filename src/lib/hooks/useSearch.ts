@@ -2,7 +2,7 @@ import { getDomainKeySync } from "@bonfida/spl-name-service";
 import { useConnectionPassThrough } from "../contexts/connection-passthrough-provider";
 import { useAsync } from "react-async-hook";
 import { generateRandomDomain } from "../utils";
-import { Connection } from "@solana/web3.js";
+import type { Connection } from "@solana/web3.js";
 
 export interface Result {
   domain: string;
