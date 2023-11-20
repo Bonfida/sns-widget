@@ -10,7 +10,7 @@ import { WalletPassthroughProvider } from "./wallet-passthrough-provider";
 import { ConnectionPassthroughProvider } from "./connection-passthrough-provider";
 
 import "@solana/wallet-adapter-react-ui/styles.css";
-import { Connection } from "@solana/web3.js";
+import type { Connection } from "@solana/web3.js";
 
 export const SolanaProvider = ({
   children,
