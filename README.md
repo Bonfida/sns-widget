@@ -17,6 +17,11 @@
 <img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white" />
 </div>
 
+<p align="center">
+    <a href="https://github.com/Bonfida/sns-widget/actions"><img src="https://github.com/Bonfida/sns-widget/actions/workflows/check-source-code.yml/badge.svg?branch=main" alt="Build Status"></a>
+    <a href="https://github.com/Bonfida/sns-widget/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@bonfida/sns-widget" alt="License"></a>
+</p>
+
 <br />
 
 This widget allows users to seamlessly purchase domain names in the Solana ecosystem, directly from any website that integrates this React component. Built for ease of use and flexibility, the widget interfaces with the Solana Name Service (SNS) and can be customized to fit the style and branding of your website.
