@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { NATIVE_MINT, getAssociatedTokenAddressSync } from "@solana/spl-token";
-import { Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
+import { type Connection, LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { useWalletPassThrough } from "../contexts/wallet-passthrough-provider";
 import { tokenList } from "../utils";
 

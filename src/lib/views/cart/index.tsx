@@ -10,7 +10,7 @@ import { NATIVE_MINT, getAssociatedTokenAddressSync } from "@solana/spl-token";
 import {
   PublicKey,
   Transaction,
-  TransactionInstruction,
+  type TransactionInstruction,
 } from "@solana/web3.js";
 import { WalletSignTransactionError } from "@solana/wallet-adapter-base";
 import { registerDomainName, REFERRERS } from "@bonfida/spl-name-service";

@@ -1,4 +1,4 @@
-import { Connection } from "@solana/web3.js";
+import type { Connection } from "@solana/web3.js";
 import { createContext, PropsWithChildren, ReactNode, useContext } from "react";
 import { useConnection } from "@solana/wallet-adapter-react";
 
