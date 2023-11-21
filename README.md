@@ -184,7 +184,7 @@ export const Page = () => {
 
 ## 🧩 Peer Dependencies
 
-The widget's implementation relies heavily on open-source libraries from @solana-labs (such as @solana/web3.js and @solana/wallet-adapter-react, and others). Unfortunately, these are [not tree-shakeable](https://github.com/solana-labs/solana-web3.js/issues/1122). To avoid increasing the bundle size, we have chosen not to include these dependencies in our bundle and mark them as peer dependencies or simply `external`. With this approach, users who do not use these dependencies will still receive them upon installation. However, **most importantly**, users who already have these dependencies in their applications won't need to download them again. This significantly reduces the size of the final bundle.
+The widget's implementation relies heavily on open-source libraries from @solana-labs (such as @solana/web3.js, @solana/wallet-adapter-react, and others). Unfortunately, these are [not tree-shakeable](https://github.com/solana-labs/solana-web3.js/issues/1122). To avoid increasing the bundle size, we have chosen not to include these dependencies in our bundle and mark them as peer dependencies, or simply `external`. With this approach, users who do not use these dependencies will still receive them upon installation. However, **most importantly**, users who already have these dependencies in their applications won't need to download them again. This significantly reduces the size of the final bundle.
 
 - "@solana/web3.js"
 - "@solana/spl-token"
