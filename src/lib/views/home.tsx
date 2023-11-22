@@ -40,12 +40,37 @@ export const WidgetHome = ({
   } = useWalletPassThrough();
   const [currentView, setCurrentView] = useState<Views>("home");
   const [finished, toggleTransitionFinish] = useState(false);
+  const [invalidSearchQuery, setInvalidSearchQuery] = useState(false);
   const [searchInput, updateSearchInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const { isCartEmpty } = useContext(CartContext);
   const { status } = useContext(GlobalStatusContext);
   const domains = useSearch(searchQuery);
   const suggestions = useDomainSuggestions(searchQuery);
+  const [timeoutId, setTimeoutId] = useState<ReturnType<
+    typeof setTimeout
+  > | null>(null);
+
+  const onSearchQueryUpdate = (value: string) => {
+    setInvalidSearchQuery(false);
+    if (timeoutId) clearTimeout(timeoutId);
+
+    updateSearchInput(
+      sanitize({
+        value,
+        prev: searchInput,
+        onError: () => {
+          setInvalidSearchQuery(true);
+
+          const timeoutId = setTimeout(() => {
+            setInvalidSearchQuery(false);
+          }, 3000);
+
+          setTimeoutId(timeoutId);
+        },
+      }),
+    );
+  };
 
   const search = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -124,9 +149,10 @@ export const WidgetHome = ({
                   className="shadow-input-field dark:shadow-none"
                   type="search"
                   required
-                  onChange={(e) =>
-                    updateSearchInput(sanitize(e.target.value, searchInput))
+                  errorMessage={
+                    invalidSearchQuery ? "Character not allowed" : undefined
                   }
+                  onChange={(e) => onSearchQueryUpdate(e.target.value)}
                 />
 
                 <button
