@@ -5,7 +5,7 @@ import {
   type CSSProperties,
 } from "react";
 import { InputField } from "../components/input-field";
-import { SearchShort } from "../components/icons";
+import { Discord, ExternalLink, SearchShort } from "../components/icons";
 import { twMerge } from "tailwind-merge";
 import { CartContext } from "../contexts/cart";
 import { DomainSearchResultRow } from "../components/domain-search-result-row";
@@ -183,13 +183,49 @@ export const WidgetHome = ({
                       ))}
                     </>
                   )}
-
                   <div className="mt-4">
-                    <p className="mb-2 ml-4 text-sm text-text-secondary font-primary">
-                      You might also like
-                    </p>
+                    {suggestions.status !== "error" && (
+                      <p className="mb-2 ml-4 text-sm text-text-secondary font-primary">
+                        You might also like
+                      </p>
+                    )}
 
                     <div className="flex flex-col gap-2 pb-14">
+                      {suggestions.status === "error" && (
+                        <div>
+                          <p className="mb-6 text-sm tracking-widest text-center">
+                            Looks like we have an issue helping you with domain
+                            suggestions.
+                          </p>
+
+                          <button
+                            type="button"
+                            className="m-auto flex items-center gap-2 px-3 h-[32px] w-max py-1 text-xs tracking-wide rounded-lg bg-theme-secondary font-primary text-theme-primary"
+                            tabIndex={0}
+                            aria-label={`Try load suggestions for ${searchQuery} again`}
+                            onClick={() => suggestions.execute()}
+                          >
+                            Try again '{searchQuery}'
+                          </button>
+
+                          <p className="my-6 text-sm tracking-widest text-center">
+                            ...and if the problem persists
+                          </p>
+
+                          <div className="flex justify-center">
+                            <a
+                              className="flex items-center gap-2 justify-center text-theme-primary text-[11px] tracking-wider dark:text-theme-secondary"
+                              href="https://discord.bonfida.org"
+                              target="_blank"
+                              rel="noopener"
+                            >
+                              <Discord width={24} />
+                              Tell us on discord
+                              <ExternalLink width={18} />
+                            </a>
+                          </div>
+                        </div>
+                      )}
                       {suggestions.loading ? (
                         <>
                           {new Array(5).fill(0).map((_, index) => (
