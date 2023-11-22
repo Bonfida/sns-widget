@@ -51,7 +51,7 @@ export const ConnectWalletButton = () => {
         aria-label="Disconnect wallet"
         className={twMerge(
           !isDropdownVisible && "invisible opacity-0 -translate-y-1",
-          "absolute h-[48px] top-[100%] left-0 right-0 w-full",
+          "absolute h-[48px] top-[100%] left-0 right-0 w-full z-10",
           "duration-300 transition-[transform,opacity]",
           "bg-background-secondary rounded-xl text-base flex items-center justify-center text-text-primary",
           "shadow-domain dark:shadow-none dark:border dark:border-interactive-border",
