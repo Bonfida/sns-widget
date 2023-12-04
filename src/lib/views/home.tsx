@@ -4,6 +4,7 @@ import {
   useContext,
   type CSSProperties,
 } from "react";
+import { useSearch, useDomainSuggestions } from "@bonfida/sns-react";
 import { InputField } from "../components/input-field";
 import { Discord, ExternalLink, SearchShort } from "../components/icons";
 import { twMerge } from "tailwind-merge";
@@ -14,9 +15,7 @@ import { CustomButton } from "../components/button";
 import { FidaLogo } from "../components/fida-logo";
 import { CartView } from "./cart";
 import { useWalletPassThrough } from "../contexts/wallet-passthrough-provider";
-import { useSearch } from "../hooks/useSearch";
 import { sanitize } from "../utils";
-import { useDomainSuggestions } from "../hooks/useDomainSuggestions";
 import { ConnectWalletButton } from "../components/connect-wallet-button";
 import { GlobalStatusCard } from "../components/global-status";
 import { GlobalStatusContext } from "../contexts/status-messages";
@@ -37,6 +36,7 @@ export const WidgetHome = ({
     connected,
     setVisible,
     visible: isWalletSelectorVisible,
+    connection,
   } = useWalletPassThrough();
   const [currentView, setCurrentView] = useState<Views>("home");
   const [finished, toggleTransitionFinish] = useState(false);
@@ -45,8 +45,11 @@ export const WidgetHome = ({
   const [searchQuery, setSearchQuery] = useState("");
   const { isCartEmpty } = useContext(CartContext);
   const { status } = useContext(GlobalStatusContext);
-  const domains = useSearch(searchQuery);
-  const suggestions = useDomainSuggestions(searchQuery);
+  const domains = useSearch({ connection: connection!, domain: searchQuery });
+  const suggestions = useDomainSuggestions({
+    connection: connection!,
+    domain: searchQuery,
+  });
   const [timeoutId, setTimeoutId] = useState<ReturnType<
     typeof setTimeout
   > | null>(null);
