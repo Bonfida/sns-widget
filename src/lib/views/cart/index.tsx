@@ -7,6 +7,7 @@ import {
 } from "../../components/icons";
 import { twMerge } from "tailwind-merge";
 import { NATIVE_MINT, getAssociatedTokenAddressSync } from "@solana/spl-token";
+import { getDomainPriceFromName } from "@bonfida/spl-name-service";
 import {
   PublicKey,
   Transaction,
@@ -22,7 +23,6 @@ import { BaseModal } from "../../components/modal";
 import {
   tokenList,
   FIDA_MINT,
-  priceFromLength,
   formatPrice,
   wrapSol,
   unwrapSol,
@@ -72,7 +72,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
   const isSelectedTokenFIDA = selectedToken.mintAddress === FIDA_MINT;
   const discountMul = isSelectedTokenFIDA ? 0.95 : 1;
   const totalUsd = Object.values(cart).reduce(
-    (acc, v) => acc + priceFromLength(v.domain, discountMul),
+    (acc, v) => acc + getDomainPriceFromName(v.domain) * discountMul,
     0,
   );
 

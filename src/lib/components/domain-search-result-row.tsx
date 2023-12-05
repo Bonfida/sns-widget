@@ -1,10 +1,9 @@
 import { twMerge } from "tailwind-merge";
+import { getDomainPriceFromName } from "@bonfida/spl-name-service";
 import { ShoppingBasketHorizontal, TrashBent, Tick } from "../components/icons";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/cart";
 import { DomainCardBase } from "./domain-card-base";
-import { priceFromLength } from "../utils";
-
 export const DomainSearchResultRow = ({
   domain,
   available = false,
@@ -15,7 +14,7 @@ export const DomainSearchResultRow = ({
   price?: number;
 }) => {
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
-  price = price ?? priceFromLength(domain);
+  price = price ?? getDomainPriceFromName(domain);
   const isInCart = Boolean(cart[domain]);
 
   const [showRemoveButton, toggleRemoveButton] = useState(isInCart);
