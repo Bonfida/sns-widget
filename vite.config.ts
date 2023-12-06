@@ -6,6 +6,7 @@ import { nodePolyfills } from "vite-plugin-node-polyfills";
 import terser from "@rollup/plugin-terser";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import babel from "@rollup/plugin-babel";
+import banner2 from "rollup-plugin-banner2";
 
 const resolvePath = (str: string) => path.resolve(__dirname, str);
 
@@ -50,7 +51,11 @@ export default defineConfig(({ mode }) => {
             "@pythnetwork/client": "@pythnetwork/client",
           },
         },
-        plugins: [terser({ compress: true })],
+        plugins: [
+          terser({ compress: true }),
+          // Need it for Next.js
+          banner2(() => `"use client";`),
+        ],
       },
     },
     plugins: [
