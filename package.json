@@ -72,9 +72,9 @@
     "vite-plugin-node-polyfills": "^0.17.0"
   },
   "dependencies": {
-    "@bonfida/emojis": "^1.0.2",
+    "@bonfida/emojis": "^1.0.4",
     "@bonfida/sns-react": "^2.0.2",
-    "@bonfida/spl-name-service": "2.3.1",
+    "@bonfida/spl-name-service": "2.5.0",
     "@pythnetwork/client": "^2.19.0",
     "@solana/wallet-adapter-react": "^0.15",
     "@solana/wallet-adapter-react-ui": "^0.9",
