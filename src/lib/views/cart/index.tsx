@@ -14,7 +14,7 @@ import {
   type TransactionInstruction,
 } from "@solana/web3.js";
 import { WalletSignTransactionError } from "@solana/wallet-adapter-base";
-import { registerDomainName, REFERRERS } from "@bonfida/spl-name-service";
+import { registerDomainNameV2, REFERRERS } from "@bonfida/spl-name-service";
 import { DomainCartItem } from "../../components/domain-cart-item";
 import { CartContext } from "../../contexts/cart";
 import { GlobalStatusContext } from "../../contexts/status-messages";
@@ -147,7 +147,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
 
       const ata = getAssociatedTokenAddressSync(mintKey, buyer);
       for (const item of Object.values(cart)) {
-        const [, ix] = await registerDomainName(
+        const ix = await registerDomainNameV2(
           connection,
           item.domain,
           item.storage,
