@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CartContextProvider } from "./contexts/cart";
 import type { WidgetProps } from "./types";
 import { GlobalStatusContextProvider } from "./contexts/status-messages";
@@ -13,22 +15,31 @@ const Widget = ({
   referrerKey,
   partnerLogo,
 }: WidgetProps) => {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: { queries: { staleTime: 1_000 * 10 } },
+      }),
+  );
+
   return (
-    <SolanaProvider
-      endpoint={endpoint}
-      connection={connection}
-      passthroughWallet={passthroughWallet}
-    >
-      <CartContextProvider referrerKey={referrerKey}>
-        <GlobalStatusContextProvider>
-          <WidgetHome
-            className={containerClassNames}
-            style={containerStyles}
-            partnerLogo={partnerLogo}
-          />
-        </GlobalStatusContextProvider>
-      </CartContextProvider>
-    </SolanaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SolanaProvider
+        endpoint={endpoint}
+        connection={connection}
+        passthroughWallet={passthroughWallet}
+      >
+        <CartContextProvider referrerKey={referrerKey}>
+          <GlobalStatusContextProvider>
+            <WidgetHome
+              className={containerClassNames}
+              style={containerStyles}
+              partnerLogo={partnerLogo}
+            />
+          </GlobalStatusContextProvider>
+        </CartContextProvider>
+      </SolanaProvider>
+    </QueryClientProvider>
   );
 };
 

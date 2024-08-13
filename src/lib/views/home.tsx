@@ -45,11 +45,11 @@ export const WidgetHome = ({
   const [searchQuery, setSearchQuery] = useState("");
   const { isCartEmpty } = useContext(CartContext);
   const { status } = useContext(GlobalStatusContext);
-  const domains = useSearch({ connection: connection!, domain: searchQuery });
-  const suggestions = useDomainSuggestions({
+  const domains = useSearch({
     connection: connection!,
     domain: searchQuery,
   });
+  const suggestions = useDomainSuggestions(connection!, searchQuery);
   const [timeoutId, setTimeoutId] = useState<ReturnType<
     typeof setTimeout
   > | null>(null);
@@ -99,7 +99,7 @@ export const WidgetHome = ({
   return (
     <div
       className={twMerge(
-        "flex flex-col w-[93svw] h-[560px] max-h-[75svh] max-w-[400px] bg-background-primary rounded-lg absolute bottom-16 right-0 text-text-primary overflow-auto",
+        "absolute bottom-16 right-0 flex h-[560px] max-h-[75svh] w-[93svw] max-w-[400px] flex-col overflow-auto rounded-lg bg-background-primary text-text-primary",
         "shadow-xl dark:border dark:border-interactive-border",
         className,
       )}
@@ -110,7 +110,7 @@ export const WidgetHome = ({
 
       <div className="flex items-center px-3 pt-3">
         {!isHomeView && (
-          <div className="flex items-center justify-center gap-2 text-sm font-medium text-center text-text-primary">
+          <div className="flex items-center justify-center gap-2 text-center text-sm font-medium text-text-primary">
             <span className="h-[26px]">
               <FidaLogo />
             </span>
@@ -120,19 +120,19 @@ export const WidgetHome = ({
         <ConnectWalletButton />
       </div>
 
-      <div className="flex flex-col flex-grow overflow-auto">
+      <div className="flex flex-grow flex-col overflow-auto">
         {(isHomeView || isSearchView) && (
           <>
             <div
               className={twMerge(
-                "translate-y-[80px] transition-all duration-700 px-3",
+                "translate-y-[80px] px-3 transition-all duration-700",
                 isSearchView && "-translate-y-[22px]",
               )}
             >
               <h1
                 className={twMerge(
-                  "block max-h-[32px] text-2xl font-medium text-center font-primary transition-[opacity] ease-out duration-200",
-                  isSearchView && "opacity-0 invisible",
+                  "block max-h-8 text-center font-primary text-2xl font-medium transition-[opacity] duration-200 ease-out",
+                  isSearchView && "invisible opacity-0",
                   finished && "max-h-0",
                 )}
                 onTransitionEnd={() => {
@@ -142,7 +142,7 @@ export const WidgetHome = ({
                 Secure a custom domain
               </h1>
 
-              <form className="flex gap-2 mt-10" onSubmit={search}>
+              <form className="mt-10 flex gap-2" onSubmit={search}>
                 <InputField
                   value={searchInput}
                   placeholder="Search your domain"
@@ -159,10 +159,7 @@ export const WidgetHome = ({
                 />
 
                 <button
-                  className="
-                    rounded-[10px] bg-theme-primary h-[56px] w-[56px] p-2
-                    flex items-center justify-center text-base-button-content
-                  "
+                  className="flex size-[56px] items-center justify-center rounded-[10px] bg-theme-primary p-2 text-base-button-content"
                   tabIndex={0}
                 >
                   <SearchShort width={24} height={24} />
@@ -172,23 +169,25 @@ export const WidgetHome = ({
 
             {isSearchView && (
               <>
-                <div className="px-3 mb-3 overflow-auto animate-fade-in">
-                  {domains.loading ? (
+                <div className="mb-3 animate-fade-in overflow-auto px-3">
+                  {domains.isLoading ? (
                     <DomainCardSkeleton />
                   ) : (
                     <>
-                      {domains.result?.map((domain) => (
-                        <DomainSearchResultRow
-                          key={domain.domain}
-                          domain={domain.domain}
-                          available={domain.available}
-                        />
-                      ))}
+                      {domains.data?.map(
+                        (domain: { domain: string; available: boolean }) => (
+                          <DomainSearchResultRow
+                            key={domain.domain}
+                            domain={domain.domain}
+                            available={domain.available}
+                          />
+                        ),
+                      )}
                     </>
                   )}
                   <div className="mt-4">
                     {suggestions.status !== "error" && (
-                      <p className="mb-2 ml-4 text-sm text-text-secondary font-primary">
+                      <p className="mb-2 ml-4 font-primary text-sm text-text-secondary">
                         You might also like
                       </p>
                     )}
@@ -196,28 +195,28 @@ export const WidgetHome = ({
                     <div className="flex flex-col gap-2 pb-14">
                       {suggestions.status === "error" && (
                         <div>
-                          <p className="mb-6 text-sm tracking-widest text-center">
+                          <p className="mb-6 text-center text-sm tracking-widest">
                             Looks like we have an issue helping you with domain
                             suggestions.
                           </p>
 
                           <button
                             type="button"
-                            className="m-auto flex items-center gap-2 px-3 h-[32px] w-max py-1 text-xs tracking-wide rounded-lg bg-theme-secondary font-primary text-theme-primary"
+                            className="m-auto flex h-8 w-max items-center gap-2 rounded-lg bg-theme-secondary px-3 py-1 font-primary text-xs tracking-wide text-theme-primary"
                             tabIndex={0}
                             aria-label={`Try load suggestions for ${searchQuery} again`}
-                            onClick={() => suggestions.execute()}
+                            onClick={() => suggestions.refetch()}
                           >
                             Try again '{searchQuery}'
                           </button>
 
-                          <p className="my-6 text-sm tracking-widest text-center">
+                          <p className="my-6 text-center text-sm tracking-widest">
                             ...and if the problem persists
                           </p>
 
                           <div className="flex justify-center">
                             <a
-                              className="flex items-center gap-2 justify-center text-theme-primary text-[11px] tracking-wider dark:text-theme-secondary"
+                              className="flex items-center justify-center gap-2 text-[11px] tracking-wider text-theme-primary dark:text-theme-secondary"
                               href="https://discord.bonfida.org"
                               target="_blank"
                               rel="noopener"
@@ -229,7 +228,7 @@ export const WidgetHome = ({
                           </div>
                         </div>
                       )}
-                      {suggestions.loading ? (
+                      {suggestions.isLoading ? (
                         <>
                           {new Array(5).fill(0).map((_, index) => (
                             <DomainCardSkeleton key={index} />
@@ -237,13 +236,18 @@ export const WidgetHome = ({
                         </>
                       ) : (
                         <>
-                          {suggestions.result?.map((domain) => (
-                            <DomainSearchResultRow
-                              key={domain.domain}
-                              domain={domain.domain}
-                              available={domain.available}
-                            />
-                          ))}
+                          {suggestions.data?.map(
+                            (domain: {
+                              domain: string;
+                              available: boolean;
+                            }) => (
+                              <DomainSearchResultRow
+                                key={domain.domain}
+                                domain={domain.domain}
+                                available={domain.available}
+                              />
+                            ),
+                          )}
                         </>
                       )}
                     </div>
@@ -251,7 +255,7 @@ export const WidgetHome = ({
                 </div>
                 {!isCartEmpty && (
                   <CustomButton
-                    className="absolute left-3 right-3 bottom-3 text-base-button-content"
+                    className="absolute bottom-3 left-3 right-3 text-base-button-content"
                     onClick={() => {
                       if (connected) setCurrentView("cart");
                       else setVisible(!isWalletSelectorVisible);
@@ -270,9 +274,9 @@ export const WidgetHome = ({
 
       {isHomeView && (
         <div className="p-3">
-          <div className="flex items-center justify-center gap-2 text-sm font-medium text-center text-text-primary">
+          <div className="flex items-center justify-center gap-2 text-center text-sm font-medium text-text-primary">
             Powered by
-            <span className="h-[20px] flex">
+            <span className="flex h-5">
               <FidaLogo />
             </span>
             {partnerLogo && (

@@ -2,16 +2,16 @@ import { InformationCircle } from "../../components/icons";
 
 export const CartError = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-6 px-3 grow-[0.5] text-center">
+    <div className="flex grow-[0.5] flex-col items-center justify-center gap-6 px-3 text-center">
       <InformationCircle
         width={90}
         height={90}
         className="rotate-180 text-theme-primary text-opacity-60"
       />
 
-      <p className="text-lg font-bold font-primary">Something went wrong</p>
+      <p className="font-primary text-lg font-bold">Something went wrong</p>
 
-      <p className="text-sm font-primary">Please retry the process</p>
+      <p className="font-primary text-sm">Please retry the process</p>
     </div>
   );
 };
