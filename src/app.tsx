@@ -28,7 +28,6 @@ const PUBLIC_RPC = import.meta.env.VITE_PUBLIC_RPC as string;
 
 const SolanaProvider = ({ children }: { children: ReactNode }) => {
   return (
-    // <ConnectionProvider endpoint={PUBLIC_RPC}>
     <WalletProvider
       autoConnect
       wallets={[
@@ -49,25 +48,23 @@ const SolanaProvider = ({ children }: { children: ReactNode }) => {
     >
       <WalletModalProvider>{children}</WalletModalProvider>
     </WalletProvider>
-    //</ConnectionProvider>
   );
 };
 
 const Content = () => {
   const wallet = useWallet();
-  // const { connection } = useConnection();
   const { visible, setVisible } = useWalletModal();
   const [isDark, toggleDark] = useState(false);
 
   return (
     <div className="p-10">
-      <h1 className="text-[40px] text-center text-white font-medium">
+      <h1 className="text-white text-center text-[40px] font-medium">
         SNS Widget Demo
       </h1>
 
       <div className="mt-10">
         <button
-          className="p-3 bg-white rounded-[24px] font-medium"
+          className="bg-white rounded-3xl p-3 font-medium"
           onClick={() => toggleDark(!isDark)}
         >
           Toggle dark
@@ -75,7 +72,6 @@ const Content = () => {
       </div>
 
       <Widget
-        // connection={connection}
         endpoint={PUBLIC_RPC}
         passthroughWallet={{ ...wallet, visible, setVisible }}
         isDark={isDark}

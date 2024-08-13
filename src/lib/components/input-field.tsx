@@ -21,7 +21,7 @@ export const InputField = ({
         ref={input}
         value={value}
         className={twMerge(
-          "w-full h-full px-3 py-4 text-sm border border-opacity-25 rounded-xl border-field-border dark:border-interactive-border bg-background-secondary text-ellipsis",
+          "h-full w-full text-ellipsis rounded-xl border border-field-border border-opacity-25 bg-background-secondary px-3 py-4 text-sm dark:border-interactive-border",
           className,
           type === "search" && "pr-8",
         )}
@@ -31,7 +31,7 @@ export const InputField = ({
       {type === "search" && value && (
         <button
           type="button"
-          className="absolute p-1 top-3 right-1"
+          className="absolute right-1 top-3 p-1"
           aria-label="Clear"
           tabIndex={0}
           onClick={() => {
@@ -45,7 +45,7 @@ export const InputField = ({
       )}
 
       {errorMessage && (
-        <p className="absolute top-[calc(100%+4px)] text-error font-medium tracking-widest pl-3 text-xs animate-[fade-in_300ms_ease-out]">
+        <p className="absolute top-[calc(100%+4px)] animate-[fade-in_300ms_ease-out] pl-3 text-xs font-medium tracking-widest text-error">
           {errorMessage}
         </p>
       )}

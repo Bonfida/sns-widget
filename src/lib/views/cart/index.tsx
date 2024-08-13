@@ -1,20 +1,23 @@
 import { useState, useContext, useEffect } from "react";
-import {
-  ArrowLeft,
-  WalletClose,
-  RemoveThin,
-  Information,
-} from "../../components/icons";
 import { twMerge } from "tailwind-merge";
 import { NATIVE_MINT, getAssociatedTokenAddressSync } from "@solana/spl-token";
-import { getDomainPriceFromName } from "@bonfida/spl-name-service";
+import {
+  getDomainPriceFromName,
+  registerDomainNameV2,
+  REFERRERS,
+} from "@bonfida/spl-name-service";
 import {
   PublicKey,
   Transaction,
   type TransactionInstruction,
 } from "@solana/web3.js";
 import { WalletSignTransactionError } from "@solana/wallet-adapter-base";
-import { registerDomainNameV2, REFERRERS } from "@bonfida/spl-name-service";
+import {
+  ArrowLeft,
+  WalletClose,
+  RemoveThin,
+  Information,
+} from "../../components/icons";
 import { DomainCartItem } from "../../components/domain-cart-item";
 import { CartContext } from "../../contexts/cart";
 import { GlobalStatusContext } from "../../contexts/status-messages";
@@ -203,28 +206,28 @@ export const CartView = ({ backHandler }: CartViewProps) => {
   };
 
   return (
-    <div className="flex flex-col flex-grow pb-14">
-      <div className="sticky -top-1 bg-background-primary h-[48px] flex justify-center items-center px-3">
+    <div className="flex flex-grow flex-col pb-14">
+      <div className="sticky -top-1 flex h-12 items-center justify-center bg-background-primary px-3">
         <button
           type="button"
           tabIndex={0}
           onClick={goBack}
           disabled={formState === "processing"}
-          className="absolute top-0 p-3 border-0 left-3 text-theme-primary dark:text-theme-secondary"
+          className="absolute left-3 top-0 border-0 p-3 text-theme-primary dark:text-theme-secondary"
         >
           <ArrowLeft width={24} height={24} />
         </button>
 
-        <div className="w-[175px] h-[5px] rounded-md bg-background-interactive dark:bg-background-secondary bg-gradient-to-r">
+        <div className="h-[5px] w-[175px] rounded-md bg-background-interactive bg-gradient-to-r dark:bg-background-secondary">
           <div
             className={twMerge(
-              "bg-theme-primary dark:bg-theme-secondary h-full rounded-md transition-[width] duration-500",
+              "h-full rounded-md bg-theme-primary transition-[width] duration-500 dark:bg-theme-secondary",
               progressWidth[step],
             )}
           ></div>
         </div>
       </div>
-      <div className="flex flex-col flex-grow pt-6 body">
+      <div className="body flex flex-grow flex-col pt-6">
         {formState === "success" && <CartSuccess />}
         {formState === "error" && <CartError />}
         {formState === "processing" && <CartProcessing />}
@@ -232,7 +235,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
           <>
             {step === 1 && (
               <>
-                <p className="px-3 mb-2 ml-4 text-sm text-text-secondary font-primary">
+                <p className="mb-2 ml-4 px-3 font-primary text-sm text-text-secondary">
                   You are registering
                 </p>
 
@@ -251,13 +254,13 @@ export const CartView = ({ backHandler }: CartViewProps) => {
                   toggleVisibility={() => editStorageForDomain("")}
                 >
                   {!!selectedStorageDomain && (
-                    <div className="w-[320px] p bg-background-primary flex flex-col gap-3 p-4 rounded-xl">
-                      <p className="flex items-start justify-between text-lg font-medium font-primary">
+                    <div className="p flex w-[320px] flex-col gap-3 rounded-xl bg-background-primary p-4">
+                      <p className="flex items-start justify-between font-primary text-lg font-medium">
                         Storage size
                         <button
                           type="button"
                           tabIndex={0}
-                          className="p-1 -mt-3 -mr-3"
+                          className="-mr-3 -mt-3 p-1"
                           onClick={() => editStorageForDomain("")}
                         >
                           <RemoveThin width={24} height={24} />
@@ -274,7 +277,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
                           <Information
                             width={16}
                             height={16}
-                            className="inline mr-1 mb-[2px] text-accent"
+                            className="mb-0.5 mr-1 inline text-accent"
                           />
                           Each additional kb of memory costs around 0.007 SOL
                           (0.001 USDC)
@@ -293,7 +296,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
                               tabIndex={0}
                               key={size.value}
                               className={twMerge(
-                                "border-2 border-solid rounded-lg px-2 py-2 border-theme-primary border-opacity-10 text-sm",
+                                "rounded-lg border-2 border-solid border-theme-primary border-opacity-10 px-2 py-2 text-sm",
                                 selected && "border-opacity-100",
                               )}
                               onClick={() => {
@@ -312,34 +315,34 @@ export const CartView = ({ backHandler }: CartViewProps) => {
               </>
             )}
             {step === 2 && (
-              <div className="flex flex-col flex-grow px-3 pb-5">
+              <div className="flex flex-grow flex-col px-3 pb-5">
                 <div className="mb-auto">
-                  <p className="mb-3 ml-4 font-medium font-primary">Pay with</p>
+                  <p className="mb-3 ml-4 font-primary font-medium">Pay with</p>
                   <div>
                     <button
                       type="button"
                       tabIndex={0}
-                      className="flex items-center w-full gap-4 p-4 border cursor-pointer rounded-xl border-interactive-border bg-background-interactive"
+                      className="flex w-full cursor-pointer items-center gap-4 rounded-xl border border-interactive-border bg-background-interactive p-4"
                       onClick={() => toggleTokenSelector(!isTokenSelectorOpen)}
                     >
                       <img
-                        className="w-4 h-4 rounded-[50%]"
+                        className="h-4 w-4 rounded-[50%]"
                         src={selectedToken.icon}
                         alt={selectedToken.tokenSymbol}
                       />
                       <span className="tracking-wide text-text-primary">
                         {selectedToken.tokenSymbol}
                       </span>
-                      <div className="relative w-[25px] h-[25px] flex justify-center items-center ml-auto">
+                      <div className="relative ml-auto flex size-[25px] items-center justify-center">
                         <div
                           className={twMerge(
-                            "transition-transform duration-200 absolute w-[8px] h-[2px] bg-theme-primary dark:bg-theme-secondary rounded-sm -rotate-[45deg] ml-[5px]",
+                            "absolute ml-[5px] h-0.5 w-2 -rotate-[45deg] rounded-sm bg-theme-primary transition-transform duration-200 dark:bg-theme-secondary",
                             isTokenSelectorOpen && "rotate-[45deg]",
                           )}
                         ></div>
                         <div
                           className={twMerge(
-                            "transition-transform duration-200 absolute w-[8px] h-[2px] bg-theme-primary dark:bg-theme-secondary rounded-sm rotate-[45deg] -ml-[4px]",
+                            "absolute -ml-[4px] h-0.5 w-2 rotate-[45deg] rounded-sm bg-theme-primary transition-transform duration-200 dark:bg-theme-secondary",
                             isTokenSelectorOpen && "-rotate-[45deg]",
                           )}
                         ></div>
@@ -349,8 +352,8 @@ export const CartView = ({ backHandler }: CartViewProps) => {
                 </div>
 
                 <div>
-                  <p className="mb-3 font-medium font-primary">Order summary</p>
-                  <div className="flex items-start justify-between mb-2 text-sm font-medium leading-6 border-b border-interactive-border">
+                  <p className="mb-3 font-primary font-medium">Order summary</p>
+                  <div className="mb-2 flex items-start justify-between border-b border-interactive-border text-sm font-medium leading-6">
                     <div>Total</div>
                     <div className="flex flex-col items-end">
                       <span>
@@ -362,7 +365,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-start justify-between text-sm font-medium leading-6 border-b border-interactive-border">
+                  <div className="flex items-start justify-between border-b border-interactive-border text-sm font-medium leading-6">
                     <div>Discount</div>
                     <div>{isSelectedTokenFIDA ? "5%" : "0%"}</div>
                   </div>
@@ -372,7 +375,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
                   isVisible={isTokenSelectorOpen}
                   toggleVisibility={toggleTokenSelector}
                 >
-                  <div className="w-[320px] bg-background-primary flex flex-col gap-3 py-3 rounded-xl">
+                  <div className="flex w-[320px] flex-col gap-3 rounded-xl bg-background-primary py-3">
                     {tokenList.map((item) => {
                       const total = getTotalPriceWithDiscount(item.mintAddress);
                       const isNotEnoughFunds =
@@ -385,13 +388,13 @@ export const CartView = ({ backHandler }: CartViewProps) => {
                           tabIndex={0}
                           disabled={isNotEnoughFunds}
                           className={twMerge(
-                            "flex items-center gap-3 px-3 py-1 max-w duration-200",
+                            "max-w flex items-center gap-3 px-3 py-1 duration-200",
                             "font-primary transition-[background-color]",
                             selectedToken.mintAddress === item.mintAddress &&
                               "bg-background-tertiary",
                             isNotEnoughFunds && "opacity-40",
                             !isNotEnoughFunds &&
-                              "hover:bg-background-tertiary focus:bg-background-tertiary cursor-pointer",
+                              "cursor-pointer hover:bg-background-tertiary focus:bg-background-tertiary",
                           )}
                           onClick={() => {
                             selectToken(item);
@@ -401,16 +404,16 @@ export const CartView = ({ backHandler }: CartViewProps) => {
                           <img
                             src={item.icon}
                             alt={item.tokenSymbol}
-                            className="w-6 h-6 rounded-[50%]"
+                            className="h-6 w-6 rounded-[50%]"
                           />
                           <div className="flex flex-col items-start">
                             <span>{item.tokenSymbol}</span>
-                            <span className="flex text-xs text-text-secondary gap-0.5 items-center">
+                            <span className="flex items-center gap-0.5 text-xs text-text-secondary">
                               <WalletClose width={14} height={14} />
                               {balances[item.tokenSymbol]}
                             </span>
                           </div>
-                          <div className="flex flex-col ml-auto text-sm">
+                          <div className="ml-auto flex flex-col text-sm">
                             <span
                               className={twMerge(
                                 "tabular-nums",
@@ -448,7 +451,7 @@ export const CartView = ({ backHandler }: CartViewProps) => {
       </div>
 
       {formState === "processing" ? null : (
-        <div className="absolute flex flex-col gap-2 left-3 right-3 bottom-4">
+        <div className="absolute bottom-4 left-3 right-3 flex flex-col gap-2">
           <CustomButton
             className={twMerge(
               "text-base-button-content",

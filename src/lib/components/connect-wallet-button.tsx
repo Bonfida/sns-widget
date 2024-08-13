@@ -24,10 +24,10 @@ export const ConnectWalletButton = () => {
   };
 
   return (
-    <div className="relative flex ml-auto">
+    <div className="relative ml-auto flex">
       <button
         type="button"
-        className="relative flex items-center gap-2 px-3 h-[32px] py-1 text-xs tracking-wide rounded-lg bg-theme-secondary font-primary text-theme-primary"
+        className="relative flex h-8 items-center gap-2 rounded-lg bg-theme-secondary px-3 py-1 font-primary text-xs tracking-wide text-theme-primary"
         tabIndex={0}
         aria-label="Connect wallet"
         aria-haspopup="true"
@@ -50,11 +50,11 @@ export const ConnectWalletButton = () => {
         tabIndex={0}
         aria-label="Disconnect wallet"
         className={twMerge(
-          !isDropdownVisible && "invisible opacity-0 -translate-y-1",
-          "absolute h-[48px] top-[100%] left-0 right-0 w-full z-10",
-          "duration-300 transition-[transform,opacity]",
-          "bg-background-secondary rounded-xl text-base flex items-center justify-center text-text-primary",
-          "shadow-domain dark:shadow-none dark:border dark:border-interactive-border",
+          !isDropdownVisible && "invisible -translate-y-1 opacity-0",
+          "absolute left-0 right-0 top-full z-10 h-12 w-full",
+          "transition-[transform,opacity] duration-300",
+          "flex items-center justify-center rounded-xl bg-background-secondary text-base text-text-primary",
+          "shadow-domain dark:border dark:border-interactive-border dark:shadow-none",
           "active:opacity-70 active:transition-none",
         )}
         onClick={onDisconnect}

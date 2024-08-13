@@ -20,7 +20,7 @@ export const DomainCartItem = ({ domain, onEdit }: DomainCartItemProps) => {
           <span>Storage: {cartItem.storage / 1_000}kB</span>
           <button
             type="button"
-            className="flex items-center text-theme-primary dark:text-theme-secondary gap-0.5"
+            className="flex items-center gap-0.5 text-theme-primary dark:text-theme-secondary"
             tabIndex={0}
             onClick={onEdit}
           >
