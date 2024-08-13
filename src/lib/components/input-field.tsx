@@ -4,6 +4,7 @@ import { RemoveThin } from "../components/icons";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
+  onClear?: () => void;
 }
 
 export const InputField = ({
@@ -11,6 +12,7 @@ export const InputField = ({
   value,
   className,
   errorMessage,
+  onClear,
   ...params
 }: InputProps = {}) => {
   const input = useRef<HTMLInputElement>(null);
@@ -28,16 +30,15 @@ export const InputField = ({
         type={type === "search" ? "text" : type}
       />
 
-      {type === "search" && value && (
+      {type === "search" && value && onClear && (
         <button
           type="button"
           className="absolute right-1 top-3 p-1"
           aria-label="Clear"
           tabIndex={0}
           onClick={() => {
-            if (input.current) {
-              input.current.value = "";
-            }
+            onClear();
+            input.current?.focus();
           }}
         >
           <RemoveThin width={24} height={24} />

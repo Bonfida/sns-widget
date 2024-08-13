@@ -156,6 +156,7 @@ export const WidgetHome = ({
                     invalidSearchQuery ? "Character not allowed" : undefined
                   }
                   onChange={(e) => onSearchQueryUpdate(e.target.value)}
+                  onClear={() => onSearchQueryUpdate("")}
                 />
 
                 <button
