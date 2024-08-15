@@ -218,7 +218,7 @@ export const WidgetHome = ({
                           <div className="flex justify-center">
                             <a
                               className="flex items-center justify-center gap-2 text-[11px] tracking-wider text-theme-primary dark:text-theme-secondary"
-                              href="https://discord.bonfida.org"
+                              href="https://discord.sns.id"
                               target="_blank"
                               rel="noopener"
                             >

@@ -38,7 +38,7 @@ export const CartContextProvider = ({
   referrerKey?: WidgetProps["referrerKey"];
 } = {}) => {
   const [cart = {}, updateCart] = useSessionStorageState<Cart>(
-    "bonfida-widget-cart",
+    "sns-widget-cart",
     {
       defaultValue: {},
     },
