@@ -75,8 +75,8 @@
   },
   "dependencies": {
     "@bonfida/emojis": "^1.0.4",
-    "@bonfida/sns-react": "^3.1.0",
-    "@bonfida/spl-name-service": "3.0.1",
+    "@bonfida/sns-react": "^3.1.2",
+    "@bonfida/spl-name-service": "3.0.6",
     "@pythnetwork/client": "^2.19.0",
     "@solana/wallet-adapter-react": "^0.15",
     "@solana/wallet-adapter-react-ui": "^0.9",
